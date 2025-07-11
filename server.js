@@ -7,6 +7,9 @@ import { exec } from "child_process";
 import { promisify } from "util";
 import bodyParser from "body-parser";
 import cors from "cors";
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const asyncExecute = promisify(exec);
 const ai = new GoogleGenAI({
@@ -21,7 +24,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: process.env.FRONTEND_URL,
   methods: "GET, POST, PUT, DELETE, OPTIONS",
   allowedHeaders: "Content-Type, Authorization",
   credentials: true
@@ -193,5 +196,5 @@ then your work is to create the full project again in this new folder with the m
 });
 
 app.listen(3000, () => {
-  console.log("🚀 Server running at http://localhost:3000");
+  console.log("🚀 Server running...");
 });
