@@ -110,10 +110,10 @@ app.use("/site", express.static(tempRoot));
 app.post("/generate", async (req, res) => {
   try {
     const messages = req.body.messages;
-    console.log("📥 Received messages:", messages);
+    // console.log("📥 Received messages:", messages);
     if (!messages) return res.status(400).json({ error: "Messages are required." });
 
-    console.log("📥 Received messages:", messages);
+    // console.log("📥 Received messages:", messages);
 
     const userId = Date.now().toString();
     const userDir = path.join(tempRoot, userId);
@@ -166,12 +166,12 @@ then your work is to create the full project again in this new folder with the m
           args.path = path.join(userDir, args.path);
         }
 
-        console.log(`🧠 AI Function Call: ${name}`);
-        console.log("🔧 Raw Args:", args);
+        // console.log(`🧠 AI Function Call: ${name}`);
+        // console.log("🔧 Raw Args:", args);
 
         const toolResponse = await allTools[name](args);
 
-        console.log(`✅ Tool response: ${toolResponse}`);
+        // console.log(`✅ Tool response: ${toolResponse}`);
 
         messages.push({ role: "model", parts: [{ functionCall: response.functionCalls[0] }] });
         messages.push({
@@ -200,5 +200,5 @@ app.get("/test", (req,res) =>{
 })
 
 app.listen(3000, () => {
-  console.log("🚀 Server running...");
+  // console.log("🚀 Server running...");
 });
