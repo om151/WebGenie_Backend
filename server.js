@@ -195,6 +195,10 @@ then your work is to create the full project again in this new folder with the m
   }
 });
 
+app.get("/test", (req,res) =>{
+  res.send("Testing.....")
+})
+
 app.listen(3000, () => {
   console.log("🚀 Server running...");
 });
