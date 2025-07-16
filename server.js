@@ -9,11 +9,17 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from 'dotenv';
 dotenv.config();
+import userRouter from './routers/userRoutes.js'; // ✅ ESM
+
+
+import { connectToDb } from './db.js'; // ✅ named import
+import cookieParser from 'cookie-parser'; // ✅ ESM
+
 
 
 const asyncExecute = promisify(exec);
 const ai = new GoogleGenAI({
-  apiKey: "AIzaSyDZXuSEzK8vwdgJGA-RqMoMiWVV8MFzb6o",
+  apiKey: process.env.GEN_AI_API,
 });
 
 const app = express();
@@ -22,6 +28,10 @@ const platform = os.platform();
 app.use(express.json()); 
 
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+
+connectToDb();
 
 const corsOptions = {
   origin: process.env.FRONTEND_URL,
@@ -203,9 +213,30 @@ then your work is to create the full project again in this new folder with the m
   }
 });
 
+app.use("/users", userRouter);
+
 app.get("/test", (req,res) =>{
   res.send("Testing.....")
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.listen(3000, () => {
   // console.log("🚀 Server running...");
