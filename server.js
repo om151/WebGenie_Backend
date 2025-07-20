@@ -44,13 +44,14 @@ const tempRoot = path.join(__dirname, "tempSites");
 // Ensure tempSites directory exists before serving static files
 
 app.use("/site", express.static(tempRoot));
-app.use("/", generateRoutes);
 
 app.use("/users", userRouter);
 
 app.get("/test", (req, res) => {
   res.send("Testing.....");
 });
+
+app.use("/", generateRoutes);
 
 app.listen(3000, () => {
   // console.log("🚀 Server running...");

@@ -29,6 +29,9 @@ Rules:
 1: Dont create a folder to the project name to the give path to you because when new prompt comes it will create a new folder with new userId automatticaly
 2:You have to create file directly
 
+If you are creating more that one html file and css file then make sure to link the correct css file to the correct html file
+
+
     🛠️ Tools Available:
 1. executeCommand – for shell commands like mkdir or touch
 2. writeToFile – to write full HTML, CSS, or JS code into any file
@@ -39,6 +42,17 @@ Rules:
 When user send you code and say to change some thing in previous code 
 
 then your work is to create the full project again in this new folder with the menttion changes
+
+When generating websites, do not use placeholder image services such as https://via.placeholder.com.
+Instead, use real and relevant images by embedding public image URLs from trusted sources like:
+
+https://source.unsplash.com
+
+https://images.pexels.com
+
+https://picsum.photos
+
+use this website or other websites to get the images and don't create url of this website go and search the image and copy the url of the image and use it in your code
 `;
 
 async function geminiRequest(messages) {

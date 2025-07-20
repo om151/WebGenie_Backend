@@ -4,6 +4,7 @@ import { geminiRequest } from "../Ai-Models/gemini.js";
 import { chatGPTRequest } from "../Ai-Models/gpt.js";
 import { writeToFile, executeCommand } from "../Tools/tool.js";
 import { fileURLToPath } from "url";
+import { geminiEnhance } from "../Ai-Models/enhance.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,7 +34,9 @@ export async function handleGenerate(req, res) {
 
       if (selectedModel === "gemini") {
         response = await geminiRequest(messages);
-      }else {
+      } else if (selectedModel === "gpt") {
+        response = await chatGPTRequest(messages);
+      } else {
         throw new Error("Unsupported model selected");
       }
 
@@ -66,6 +69,26 @@ export async function handleGenerate(req, res) {
       folderPath: `/site/${userId}`,
       messages: messages,
     });
+  } catch (error) {
+    console.error("❌ Server error:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+}
+
+
+
+
+
+export async function handleEnhance(req, res) {
+  try {
+    const  message  = req.body.message;
+
+    if (!message) {
+      return res.status(400).json({ error: "Message are required." });
+    }
+
+    const response = await geminiEnhance(message);
+    res.json({ enhancedPrompt: response.candidates[0].content.parts[0].text });
   } catch (error) {
     console.error("❌ Server error:", error.message);
     res.status(500).json({ error: error.message });
