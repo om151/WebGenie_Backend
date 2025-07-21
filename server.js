@@ -53,6 +53,6 @@ app.get("/test", (req, res) => {
 
 app.use("/", generateRoutes);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   // console.log("🚀 Server running...");
 });
