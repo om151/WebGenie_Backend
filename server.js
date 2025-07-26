@@ -5,13 +5,13 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
-import userRouter from "./routers/userRoutes.js"; // ✅ ESM
+import userRouter from "./routers/userRoutes.js";
 
-import { connectToDb } from "./db.js"; // ✅ named import
-import cookieParser from "cookie-parser"; // ✅ ESM
+import { connectToDb } from "./db.js";
+import cookieParser from "cookie-parser";
 
 import { fileURLToPath } from "url";
-import { generateRoutes } from "./routers/generateRoutes.js"; // ✅ ESM
+import { generateRoutes } from "./routers/generateRoutes.js";
 
 const app = express();
 
